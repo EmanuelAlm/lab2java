@@ -10,12 +10,13 @@ public abstract class Cars implements Movable {
     private Color color; // Color of the car
     private final double[] pos;
     private final int[] direction;
+    private final double weight;
 
-
-    public Cars(int nrDoors, Color color, double enginePower){
+    public Cars(int nrDoors, Color color, double enginePower, double weight){
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
+        this.weight = weight;
 
         // Always initialize pos and direction to default values
         this.pos = new double[]{0, 0};    // Initial position (x = 0, y = 0)
@@ -38,6 +39,10 @@ public abstract class Cars implements Movable {
 
     public Color getColor(){
         return color;
+    }
+
+    public double getWeight(){
+        return this.weight;
     }
 
     public void setColor(Color clr){
@@ -84,13 +89,13 @@ public abstract class Cars implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
-    @Override
+
     public void move() {
         pos[0] += getCurrentSpeed() * direction[0];
         pos[1] += getCurrentSpeed() * direction[1];
     }
 
-    @Override
+
     public void turnLeft() {
         int newX = -direction[1];
         int newY = direction[0];
@@ -98,7 +103,7 @@ public abstract class Cars implements Movable {
         direction[1] = newY;
     }
 
-    @Override
+
     public void turnRight() {
         int newX = direction[1];
         int newY = -direction[0];

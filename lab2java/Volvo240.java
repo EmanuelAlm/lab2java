@@ -5,7 +5,7 @@ public class Volvo240 extends Cars implements Movable{
     private final static double trimFactor = 1.25;
     
     public Volvo240(){
-        super(4,Color.black,100);
+        super(4,Color.black,100,1.5);
     }
 
     @Override

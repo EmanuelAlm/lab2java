@@ -5,7 +5,7 @@ public class Saab95 extends Cars implements Movable{
     private boolean turboOn;
 
     public Saab95(){
-        super(2, Color.red, 125);
+        super(2, Color.red, 125,2);
 	    turboOn = false;
     }
 
