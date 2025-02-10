@@ -2,15 +2,72 @@ import java.awt.*;
 
 public class Scania extends Cars implements Movable {
     private int truckBed;
-    private int maxTilt;
-    private boolean truckBedDown;
+    private final int maxTilt;
+    private boolean truckBedExtended;
 
+    public VehicleFunctionality parent;
 
     public Scania (){
         super(2, Color.white, 90,8);
         this.truckBed = 0;
         this.maxTilt = 70;
         this.truckBedDown = true;
+    }
+
+    public int getNrDoors(){
+        return parent.getNrDoors();
+    }
+
+    public double getEnginePower(){
+        return parent.getEnginePower();
+    }
+
+    public double getCurrentSpeed(){
+        return parent.getCurrentSpeed();
+    }
+
+    public Color getColor(){
+        return parent.getColor();
+    }
+
+    public double getWeight(){
+        return parent.getWeight();
+    }
+
+    public void setColor(Color clr){
+        parent.setColor(clr);
+    }
+
+    public void startEngine(){
+        parent.startEngine();
+    }
+
+    public void stopEngine(){
+        parent.stopEngine();
+    }
+
+    public double[] getPos(){
+        return parent.getPos();
+    }
+
+    public int[] getDirection(){
+        return parent.getDirection();
+    }
+
+    public void gas(double amount){
+        parent.gas(amount);
+    }
+
+    public void brake(double amount){
+        parent.brake(amount);
+    }
+
+    public void turnLeft(){
+        parent.turnLeft();
+    }
+
+    public void turnRight(){
+        parent.turnRight();
     }
 
     public int getMaxTilt() {
@@ -38,14 +95,15 @@ public class Scania extends Cars implements Movable {
             throw new IllegalArgumentException("vinkeln får inte höjas mer än " + maxTiltPossible + " eller sänkas med mer än " + minTiltPossible);
         }
         else this.truckBed += degrees;
-        if (truckBed != 0) this.truckBedDown = false;
 
-        return this.truckBed;
+        if (this.truckBed != 0) this.truckBedExtended = true;
+        else this.truckBedExtended = false;
+
     }
 
-    @Override
+
     protected double speedFactor(){
-        return getEnginePower() * 0.01;
+        return parent.speedFactor();
     }
 
     @Override

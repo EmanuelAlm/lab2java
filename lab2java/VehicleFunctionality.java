@@ -3,7 +3,7 @@ import java.awt.*;
 // Reason for choosing abstract(subclassing) instead of interfaces:
 // To be able to implement variables that are common between the cars but don't have the same value
 // (using interfaces the variables declared will be static and final)
-public abstract class Cars implements Movable {
+public class VehicleFunctionality implements Movable, Vehicle {
     private final int nrDoors; // Number of doors on the car
     private final double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car, needs to be protected in order for tests to work
@@ -57,7 +57,9 @@ public abstract class Cars implements Movable {
         currentSpeed = 0;
     }
 
-    protected abstract double speedFactor();
+    protected double speedFactor(){
+        return getEnginePower() * 0.01;
+    }
 
     public double[] getPos() {
         return pos;
@@ -103,12 +105,20 @@ public abstract class Cars implements Movable {
         direction[1] = newY;
     }
 
-
     public void turnRight() {
         int newX = direction[1];
         int newY = -direction[0];
         direction[0] = newX;
         direction[1] = newY;
+    }
+    protected void setPos(double[] pos){
+        this.pos[0] = pos[0];
+        this.pos[1] = pos[1];
+    }
+
+    protected void setDirection(int[] direction){
+        this.direction[0] = direction[0];
+        this.direction[1] = direction[1];
     }
 }
 

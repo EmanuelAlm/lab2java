@@ -4,7 +4,7 @@ import java.awt.*;
 
 import static org.junit.Assert.*;
 
-public class TestScaniaTruck {
+public class TestTruck {
 
     @Test
     public void testConstructor() {
@@ -17,12 +17,21 @@ public class TestScaniaTruck {
         assertEquals(0,scania.getPos()[1],0.0);
         assertEquals(0 ,scania.getDirection()[0]);
         assertEquals(1 ,scania.getDirection()[1]);
+        assertFalse(scania.getTruckBedStatus());
+        assertEquals(0 ,scania.getTruckBedAngle());
+    }
+    @Test
+    public void testBedDownFalse() {
+        Scania scania = new Scania();
+        scania.tiltBed(50);
+        assertTrue(scania.getTruckBedStatus());
+        scania.tiltBed(-50);
+        assertFalse(scania.getTruckBedStatus());
     }
 
     @Test
     public void testMoveWithBedUp () {
         Scania scania = new Scania();
-        scania.stopEngine();
         int degrees = 30;
         scania.tiltBed(degrees);
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
