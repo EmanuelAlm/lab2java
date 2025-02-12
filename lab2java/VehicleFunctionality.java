@@ -12,7 +12,7 @@ public class VehicleFunctionality implements Movable, Vehicle {
     private final int[] direction;
     private final double weight;
 
-    public Cars(int nrDoors, Color color, double enginePower, double weight){
+    public VehicleFunctionality(int nrDoors, Color color, double enginePower, double weight){
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
@@ -111,12 +111,12 @@ public class VehicleFunctionality implements Movable, Vehicle {
         direction[0] = newX;
         direction[1] = newY;
     }
-    protected void setPos(double[] pos){
+    public void setPos(double[] pos){
         this.pos[0] = pos[0];
         this.pos[1] = pos[1];
     }
 
-    protected void setDirection(int[] direction){
+    public void setDirection(int[] direction){
         this.direction[0] = direction[0];
         this.direction[1] = direction[1];
     }

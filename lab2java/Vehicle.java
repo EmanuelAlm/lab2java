@@ -13,5 +13,6 @@ public interface Vehicle {
     int[] getDirection();
     void gas(double amount);
     void brake(double amount);
-
+    void setPos(double[] pos);
+    void setDirection(int[] direction);
 }

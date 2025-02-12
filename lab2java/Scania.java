@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scania extends Cars implements Movable {
+public class Scania implements Movable, TruckBed, Vehicle {
     private int truckBed;
     private final int maxTilt;
     private boolean truckBedExtended;
@@ -8,10 +8,10 @@ public class Scania extends Cars implements Movable {
     private final VehicleFunctionality parent;
 
     public Scania (){
-        super(2, Color.white, 90,8);
+        this.parent = new VehicleFunctionality(2, Color.white, 90,8);
         this.truckBed = 0;
         this.maxTilt = 70;
-        this.truckBedDown = true;
+        this.truckBedExtended = false;
     }
 
     public int getNrDoors(){
@@ -74,10 +74,6 @@ public class Scania extends Cars implements Movable {
         return maxTilt;
     }
 
-    public boolean getTruckBedDown(){
-        return this.truckBedDown;
-    }
-
     public int getTruckBedAngle(){
         return this.truckBed;
     }
@@ -94,7 +90,7 @@ public class Scania extends Cars implements Movable {
         if ((degrees > 70) || (degrees < -70)){
             throw new IllegalArgumentException("Ge ett värde mellan -70 och 70");
         }
-        if (getCurrentSpeed() !=0) {
+        if (this.getCurrentSpeed() !=0) {
             throw new IllegalArgumentException("Får inte vinkla flaket när lastbilen är i rörelse");
         }
         if (((this.truckBed + degrees) > 70) || ((this.truckBed + degrees) < 0)){
@@ -109,16 +105,33 @@ public class Scania extends Cars implements Movable {
 
     }
 
+    public void setTruckBedExtended(){
+        if (this.getCurrentSpeed() != 0){
+            throw new IllegalArgumentException("Bilen måste stå still för att tippa flaket uppåt");
+        } else{
+            this.truckBedExtended = true;
+            this.truckBed = this.maxTilt;
+        }
+
+    }
+
+    public void setTruckBedNeutral(){
+        this.truckBedExtended = false;
+        this.truckBed = 0;
+    }
+
+    public boolean getTruckBedStatus(){
+        return this.truckBedExtended;
+    }
+
 
     protected double speedFactor(){
         return parent.speedFactor();
     }
 
-    @Override
     public void move() {
-        if (this.truckBedDown) {
-            this.getPos()[0] += getCurrentSpeed() * this.getDirection()[0];
-            this.getPos()[1] += getCurrentSpeed() * this.getDirection()[1];
+        if (!this.truckBedExtended) {
+            parent.move();
         } else throw new IllegalArgumentException("Du kan inte röra dig när flaket är uppe");
     }
 }

@@ -8,6 +8,7 @@ public class AllModelWorkshop<T extends Vehicle> implements Workshop<T> {
         this.maxCapacity = maxCapacity;
         this.checkedInCars  = new ArrayList<>(maxCapacity);
     }
+
     public void checkInCar(T car) {
         if (checkedInCars.contains(car)){
             throw new IllegalArgumentException("Denna bil är redan inlämnad till verkstaden");

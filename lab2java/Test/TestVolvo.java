@@ -54,8 +54,6 @@ public class TestVolvo {
     }
 
 
-
-
     @Test
     public void testBrake (){
         Volvo240 volvo = new Volvo240();
