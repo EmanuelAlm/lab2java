@@ -5,7 +5,7 @@ public class Scania extends Cars implements Movable {
     private final int maxTilt;
     private boolean truckBedExtended;
 
-    public VehicleFunctionality parent;
+    private final VehicleFunctionality parent;
 
     public Scania (){
         super(2, Color.white, 90,8);
@@ -82,7 +82,15 @@ public class Scania extends Cars implements Movable {
         return this.truckBed;
     }
 
-    public int tiltBed(int degrees) {
+    public void setPos(double[] pos) {
+        parent.setPos(pos);
+    }
+
+    public void setDirection(int[] direction){
+        parent.setDirection(direction);
+    }
+
+    public void tiltBed(int degrees) {
         if ((degrees > 70) || (degrees < -70)){
             throw new IllegalArgumentException("Ge ett värde mellan -70 och 70");
         }
